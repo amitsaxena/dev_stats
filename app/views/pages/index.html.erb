@@ -28,7 +28,8 @@
                               <span class="input-group-addon">
                                   <i class="fa fa-envelope"></i>
                               </span>
-                              <div class="form-group is-empty">
+                              <div class="form-group is-empty" id="email_block">
+                                  <label class="control-label" id="email_error"></label>
                                   <%= email_field_tag :email, nil, :placeholder => "Email", :class => "form-control", :autocomplete => "off" %>
                                   <span class="material-input"></span>
                               </div>
@@ -48,7 +49,7 @@
                                   <i class="fa fa-stack-overflow"></i>
                               </span>
                               <div class="form-group is-empty">
-                                  <%= text_field_tag :stackoverflow_username, nil, :placeholder => "Stackoverflow Display Name", :class => "form-control", :autocomplete => "off" %>
+                                  <%= text_field_tag :so_username, nil, :placeholder => "Stackoverflow Display Name", :class => "form-control", :autocomplete => "off" %>
                                   <span class="material-input"></span></div>
                           </div>
 
