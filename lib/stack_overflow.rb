@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class StackOverflow
   
   # Returns exact user if found else returns suggestions
@@ -24,10 +26,15 @@ class StackOverflow
     
   end
   
-  def self.scrape_profile_data(url)
-    response = HTTParty.get(url)
-    # Get people reached
-    # Get top x% overall
+  def self.user_reach(url)
+    doc = Nokogiri::HTML(open(url))
+    reach_str = doc.css('.stat').text.squish
+    reach_str.match(/~(.+) people reached/i).captures[0] rescue nil
+  end
+  
+  def self.user_position(user_id)
+    position_html = HTTParty.get("http://stackoverflow.com/users/rank?userId=#{user_id}&_=#{DateTime.now.strftime('%Q')}")
+    Nokogiri::HTML(position_html.body).text
   end
   
 end
