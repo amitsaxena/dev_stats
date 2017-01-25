@@ -1,0 +1,35 @@
+<% if @so_response && @so_response[:found] %>
+  <p><%= image_tag @so_response[:users][0][:avatar], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+      <strong><%= @so_response[:users][0][:name] %></strong>
+  </p>
+
+  <p>
+      <span class="label label-info">Reputation: <%= @so_response[:users][0][:reputation] %></span>
+      <% if !@so_position.blank? %>
+        <span class="label label-success"><%= @so_position %></span>
+      <% end %>
+      <% if !@so_reach.blank? %>
+        <span class="label label-primary"><%= @so_reach %> people reached</span>
+      <% end %>
+  </p>
+
+  <p>Member since <%= @so_response[:users][0][:created_at].strftime("%b %d, %Y") %></p>
+<% else %>
+  <% if @so_response.blank? || @so_response[:users].blank? %>
+    <div class="alert alert-danger">
+        <div class="container-fluid">
+            <div class="alert-icon">
+                <i class="material-icons">error_outline</i>
+            </div>
+            Oops! No relevant stackoverflow user found for the data you entered. Try tweaking it a bit.
+        </div>
+    </div>
+  <% else %>
+    <p>We didn't find an exact match but you might be looking for someone below!</p>
+    <% @so_response[:users].each do |user| %>
+      <p><%= image_tag user[:avatar], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+          <strong><%= user[:name] %></strong>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
