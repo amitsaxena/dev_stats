@@ -1,6 +1,6 @@
 <div class="section section-full-screen section-signup" style="background-image: url('<%= image_url 'meter.jpg' %>'); background-size: cover; background-position: top center; min-height: 700px;">
     <div class="container">
-        <div class="row">
+        <div class="row" id="dev_form">
             <div class="col-md-4 col-md-offset-4">
                 <div class="card card-signup">
                     <%= form_tag :result, :method => :post, :class => "form", :id => "dev_form", :remote => true do %>
@@ -72,5 +72,60 @@
 
             </div>
         </div>
+        
+        
+        <!-- Results start here> -->
+        <!-- <div class="row collapse" id="result"> -->
+            <div class="row collapse" id="result">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- Tabs with icons on Card -->
+                <div class="card card-nav-tabs">
+                    <div class="header header-success">
+                        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#profile" data-toggle="tab" aria-expanded="true">
+                                            <i class="fa fa-stack-overflow fa-2x"></i>
+                                            Stackoverflow
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#messages" data-toggle="tab" aria-expanded="false">
+                                            <i class="fa fa-github fa-2x"></i>
+                                            Github
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#settings" data-toggle="tab" aria-expanded="false">
+                                            <i class="material-icons">favorite</i>
+                                            Like this?
+                                            <div class="ripple-container"></div></a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="tab-content text-center">
+                            <div class="tab-pane active" id="so_tab">
+                            </div>
+                            <div class="tab-pane" id="github_tab">
+                                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
+                            </div>
+                            <div class="tab-pane" id="settings">
+                                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Tabs with icons on Card -->
+
+            </div>
+        </div>
+        <!-- Results end here> -->
     </div>
 </div>
