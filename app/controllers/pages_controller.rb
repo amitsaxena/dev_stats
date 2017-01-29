@@ -18,6 +18,7 @@ class PagesController < ApplicationController
         if @user.blank?
           @suggestions = github.username_suggestions(params[:github_username], params[:email])
         else
+          @contributions = github.contributions(@user[:login])
           @fav_languages = github.fav_language(@user)
         end
       end

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Github
   
   def initialize
@@ -55,6 +57,12 @@ class Github
     end
     fav_languages = language_sum.sort_by{|k, v| v}.reverse[0..4].map{|a| a[0].to_s}
     return fav_languages
+  end
+  
+  def contributions(user)
+    doc = Nokogiri::HTML(open("https://github.com/#{user}"))
+    contribution_str = doc.css('.js-contribution-graph').text.squish
+    contribution_str.match(/(.+) contributions in the last year/i).captures[0] rescue nil
   end
   
 end
