@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def result
     begin
       render "error.js.erb" if params[:email].blank? || params[:email] !~ /\A(\S+)@(.+)\.(\S+)\z/
-      if !params[:so_username].blank?
+      if !params[:so_username].blank? || !params[:email].blank?
         @so_response = StackOverflow.find_user(params[:so_username], params[:email])
         if @so_response[:found]
           @so_reach = StackOverflow.user_reach(@so_response[:users][0][:so_profile_url])

@@ -5,10 +5,10 @@
   
   <p>
       <% if @user[:public_repos] && @user[:public_repos] > 0 %>
-        <span class="label label-info"><%= @user[:public_repos] %> Public Repos</span>
+        <span class="label label-info"><%= @user[:public_repos] %> Public <%= "Repo".pluralize(@user[:public_repos]) %></span>
       <% end %>
       <% if @user[:public_gists] && @user[:public_gists] > 0 %>
-        <span class="label label-success"><%= @user[:public_gists] %> Public Gists</span>
+        <span class="label label-success"><%= @user[:public_gists] %> Public <%= "Gist".pluralize(@user[:public_gists]) %></span>
       <% end %>
   </p>
   

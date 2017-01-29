@@ -5,6 +5,7 @@ class StackOverflow
   # Returns exact user if found else returns suggestions
   def self.find_user(name, email)
     result = {:found => false, :users => []}
+    name = email.split('@')[0] if name.blank?
     users = RubyStackoverflow.users({inname: name, sort: 'name'})
     users.data.each do |user|
       avatar = user.profile_image
@@ -22,6 +23,7 @@ class StackOverflow
     return result
   end
   
+  # TODO fetch top tags of a user and display in view
   def self.top_tags(user_id)
     
   end
