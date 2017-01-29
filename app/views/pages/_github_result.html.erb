@@ -2,7 +2,7 @@
   <p><%= image_tag @user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
       <strong><%= @user[:name] %></strong>
   </p>
-
+  
   <p>
       <% if @user[:public_repos] && @user[:public_repos] > 0 %>
         <span class="label label-info"><%= @user[:public_repos] %> Public Repos</span>
@@ -12,7 +12,17 @@
       <% end %>
   </p>
 
-  <p>Member since <%= @user[:created_at].strftime("%b %d, %Y") %></p>
+  <% if @fav_languages %>
+    <p>Maximum open source contributions are in <strong><%= @fav_languages[0] %></strong></p>
+    <% if !@fav_languages[1..-1].blank? %>
+    <p>Has also contributed to <strong><%= @fav_languages[1..-1].to_sentence %></strong></p>
+    <% end %>
+  <% end %>
+  
+  <% if @user[:blog] %>
+    <p><strong>Blog/Website:</strong> <%= @user[:blog] %></p>
+  <% end %>
+  <p>Member since <strong><%= @user[:created_at].strftime("%b %d, %Y") %></strong></p>
 <% else %>
   <% if @suggestions.blank? %>
     <div class="alert alert-danger">
