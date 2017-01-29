@@ -55,3 +55,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 
 gem 'ruby-stackoverflow'
+
+gem "octokit", "~> 4.0"

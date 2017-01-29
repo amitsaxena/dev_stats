@@ -1,0 +1,34 @@
+<% if @user %>
+  <p><%= image_tag @user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+      <strong><%= @user[:name] %></strong>
+  </p>
+
+  <p>
+      <% if @user[:public_repos] && @user[:public_repos] > 0 %>
+        <span class="label label-info"><%= @user[:public_repos] %> Public Repos</span>
+      <% end %>
+      <% if @user[:public_gists] && @user[:public_gists] > 0 %>
+        <span class="label label-success"><%= @user[:public_gists] %> Public Gists</span>
+      <% end %>
+  </p>
+
+  <p>Member since <%= @user[:created_at].strftime("%b %d, %Y") %></p>
+<% else %>
+  <% if @suggestions.blank? %>
+    <div class="alert alert-danger">
+        <div class="container-fluid">
+            <div class="alert-icon">
+                <i class="material-icons">error_outline</i>
+            </div>
+            Oops! No relevant Github user found for the data you entered.
+        </div>
+    </div>
+  <% else %>
+    <p>We didn't find an exact match but you might be looking for someone below!</p>
+    <% @suggestions.each do |user| %>
+      <p><%= image_tag user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+          <strong><%= user[:name] %></strong>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
