@@ -16,7 +16,7 @@ class PagesController < ApplicationController
         github = Github.new
         @user = github.find_user(params[:github_username], params[:email])
         if @user.blank?
-          @suggestions = github.username_suggestions(params[:username], params[:email])
+          @suggestions = github.username_suggestions(params[:github_username], params[:email])
         else
           @fav_languages = github.fav_language(@user)
         end

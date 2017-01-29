@@ -27,7 +27,7 @@
     <p>We didn't find an exact match but you might be looking for someone below!</p>
     <% @suggestions.each do |user| %>
       <p><%= image_tag user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
-          <strong><%= user[:name] %></strong>
+          <strong><%= user[:login] %></strong>
       </p>
     <% end %>
   <% end %>
