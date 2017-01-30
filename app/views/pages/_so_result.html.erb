@@ -33,3 +33,19 @@
     <% end %>
   <% end %>
 <% end %>
+
+  <% if !@error.blank? %>
+        <p>
+        <div class="alert alert-warning">
+            <div class="container-fluid">
+                <div class="alert-icon">
+                    <i class="material-icons">warning</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                Looks like we are facing some problems while fetching data from StackOveflow. Please try again in some time.
+            </div>
+        </div>
+    </p>
+  <% end %>

@@ -1,4 +1,8 @@
 $("#dev_form").hide();
-$("#so_tab").html('<%= escape_javascript(render(:partial => "so_result")) %>')
-$("#github_tab").html('<%= escape_javascript(render(:partial => "github_result")) %>')
+$("#so_tab").html('<%= escape_javascript(render(:partial => "so_result")) %>');
 $("#result").show();
+$.ajax({
+  type: "POST",
+  url: '/github_result',
+  data: { github_username: "<%= params[:github_username] %>", email: "<%= params[:email] %>" }
+});

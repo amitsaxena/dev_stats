@@ -8,6 +8,15 @@ class PagesController < ApplicationController
       if !params[:so_username].blank? || !params[:email].blank?
         fetch_so_data
       end
+    rescue Exception => e
+      @error = e.message
+      Rails.logger.error(e)
+      Rails.logger.error(e.backtrace.join("\n"))
+    end
+  end
+  
+  def github_result
+    begin
       if !params[:github_username].blank? || !params[:email].blank?
         fetch_github_data
       end
@@ -15,8 +24,6 @@ class PagesController < ApplicationController
       @error = e.message
       Rails.logger.error(e)
       Rails.logger.error(e.backtrace.join("\n"))
-      # TODO display error at top
-      # render "error" and return
     end
   end
   
