@@ -40,7 +40,7 @@
                                   <i class="fa fa-github"></i>
                               </span>
                               <div class="form-group is-empty">
-                                  <%= text_field_tag :github_username, nil, :placeholder => "Github Username", :class => "form-control", :autocomplete => "off" %>
+                                  <%= text_field_tag :github_username, nil, :placeholder => "Github Username or URL", :class => "form-control", :autocomplete => "off" %>
                                   <span class="material-input"></span></div>
                           </div>
 
@@ -49,7 +49,7 @@
                                   <i class="fa fa-stack-overflow"></i>
                               </span>
                               <div class="form-group is-empty">
-                                  <%= text_field_tag :so_username, nil, :placeholder => "Stackoverflow Display Name", :class => "form-control", :autocomplete => "off" %>
+                                  <%= text_field_tag :so_username, nil, :placeholder => "Stackoverflow Display Name or URL", :class => "form-control", :autocomplete => "off" %>
                                   <span class="material-input"></span></div>
                           </div>
 
@@ -63,7 +63,7 @@
                           </div> -->
                       </div>
                       <div class="footer text-center">
-                          <%= button_tag :type => 'submit', :class => "btn btn-primary btn-simple btn-lg" do %>
+                          <%= button_tag :type => 'submit', :id => "submit_button", :class => "btn btn-primary btn-simple btn-lg", "data-loading-text" => "<i class='fa fa-circle-o-notch fa-spin'></i> Investigating" do %>
                             Investigate Now<div class="ripple-container"></div>
                           <% end %>
                       </div>
@@ -136,3 +136,13 @@
         <!-- Results end here> -->
     </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $('#dev_form').on('ajax:beforeSend', function(e, data, status, xhr){
+      $('#submit_button').button('loading');
+    }).on('ajax:complete',function(e, xhr, status, error){
+      $('#submit_button').button('reset');
+    });
+  });
+</script>
