@@ -28,7 +28,12 @@ class PagesController < ApplicationController
   end
   
   def fetch_so_data
-    @so_response = StackOverflow.find_user(params[:so_username], params[:email])
+    if(params[:so_username].strip =~ /^(http|https):\/\/(.)*/i)
+      @so_response = StackOverflow.find_user_by_id(params[:so_username].split("/")[-2])
+    else
+      @so_response = StackOverflow.find_user(params[:so_username], params[:email])
+    end
+    
     if @so_response[:found]
       @so_reach = StackOverflow.user_reach(@so_response[:users][0][:so_profile_url])
       @so_position = StackOverflow.user_position(@so_response[:users][0][:user_id])
@@ -37,9 +42,10 @@ class PagesController < ApplicationController
   
   def fetch_github_data
     github = Github.new
-    @user = github.find_user(params[:github_username], params[:email])
+    username = (!params[:github_username].blank? && params[:github_username].strip =~ /^(http|https):\/\/(.)*/i) ? params[:github_username].split("/")[-1] : params[:github_username]
+    @user = github.find_user(username, params[:email])
     if @user.blank?
-      @suggestions = github.username_suggestions(params[:github_username], params[:email])
+      @suggestions = github.username_suggestions(username, params[:email])
     else
       @contributions = github.contributions(@user[:login])
       @fav_languages = github.fav_language(@user)

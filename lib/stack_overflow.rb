@@ -23,6 +23,20 @@ class StackOverflow
     return result
   end
   
+  def self.find_user_by_id(id)
+    result = {:found => false, :users => []}
+    users = RubyStackoverflow.users_by_ids([id])
+    user = users.data[0]
+    if !user.blank?
+      avatar = user.profile_image
+      user_hash = {:avatar => avatar, :name => user.display_name, :reputation => user.reputation,
+        :user_id => user.user_id, :so_profile_url => user.link, :created_at => user.creation_date.to_date}
+      result[:found] = true
+      result[:users] = [user_hash]
+    end
+    return result
+  end
+  
   # TODO fetch top tags of a user and display in view
   def self.top_tags(user_id)
     
