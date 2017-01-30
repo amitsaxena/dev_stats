@@ -6,21 +6,10 @@ class PagesController < ApplicationController
     begin
       render "error.js.erb" if params[:email].blank? || params[:email] !~ /\A(\S+)@(.+)\.(\S+)\z/
       if !params[:so_username].blank? || !params[:email].blank?
-        @so_response = StackOverflow.find_user(params[:so_username], params[:email])
-        if @so_response[:found]
-          @so_reach = StackOverflow.user_reach(@so_response[:users][0][:so_profile_url])
-          @so_position = StackOverflow.user_position(@so_response[:users][0][:user_id])
-        end
+        fetch_so_data
       end
       if !params[:github_username].blank? || !params[:email].blank?
-        github = Github.new
-        @user = github.find_user(params[:github_username], params[:email])
-        if @user.blank?
-          @suggestions = github.username_suggestions(params[:github_username], params[:email])
-        else
-          @contributions = github.contributions(@user[:login])
-          @fav_languages = github.fav_language(@user)
-        end
+        fetch_github_data
       end
     rescue Exception => e
       @error = e.message
@@ -28,6 +17,25 @@ class PagesController < ApplicationController
       Rails.logger.error(e.backtrace.join("\n"))
       # TODO display error at top
       # render "error" and return
+    end
+  end
+  
+  def fetch_so_data
+    @so_response = StackOverflow.find_user(params[:so_username], params[:email])
+    if @so_response[:found]
+      @so_reach = StackOverflow.user_reach(@so_response[:users][0][:so_profile_url])
+      @so_position = StackOverflow.user_position(@so_response[:users][0][:user_id])
+    end
+  end
+  
+  def fetch_github_data
+    github = Github.new
+    @user = github.find_user(params[:github_username], params[:email])
+    if @user.blank?
+      @suggestions = github.username_suggestions(params[:github_username], params[:email])
+    else
+      @contributions = github.contributions(@user[:login])
+      @fav_languages = github.fav_language(@user)
     end
   end
   
