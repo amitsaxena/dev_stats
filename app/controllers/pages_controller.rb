@@ -27,9 +27,22 @@ class PagesController < ApplicationController
     end
   end
   
+  def so_result
+    begin
+      render :nothing => true, :status => 500 if params[:so_user_id].blank?
+      fetch_so_data
+    rescue Exception => e
+      @error = e.message
+      Rails.logger.error(e)
+      Rails.logger.error(e.backtrace.join("\n"))
+    end
+  end
+  
   def fetch_so_data
-    if(params[:so_username].strip =~ /^(http|https):\/\/(.)*/i)
+    if(params[:so_username] && params[:so_username].strip =~ /^(http|https):\/\/(.)*/i)
       @so_response = StackOverflow.find_user_by_id(params[:so_username].split("/")[-2])
+    elsif(!params[:so_user_id].blank?)
+      @so_response = StackOverflow.find_user_by_id(params[:so_user_id])
     else
       @so_response = StackOverflow.find_user(params[:so_username], params[:email])
     end

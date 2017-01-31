@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root to: 'pages#index'
   post 'result', to: 'pages#result'
   post 'github_result', to: 'pages#github_result'
+  post 'so_result', to: 'pages#so_result'
   get 'result', to: redirect('/')
 end

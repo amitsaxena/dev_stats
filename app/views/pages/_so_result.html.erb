@@ -25,12 +25,18 @@
         </div>
     </div>
   <% else %>
-    <p>We didn't find an exact match but you might be looking for someone below!</p>
-    <% @so_response[:users].each do |user| %>
-      <p><%= image_tag user[:avatar], :class => "img-rounded", :width => "32", :alt => "avatar" %>
-          <strong><%= user[:name] %></strong>
-      </p>
-    <% end %>
+    <p>We didn't find an exact match but you might be looking for someone below! Click to investigate.</p>
+    <p>
+            <% @so_response[:users].each do |user| %>
+              <%= form_tag :so_result, :method => :post, :style => "display:inline-block", :class => "so_form", :remote => true do %>
+                <%= hidden_field_tag :so_user_id, user[:user_id] %>
+                <%= button_tag :type => 'submit', :id => "so_submit_button", :class => "btn btn-primary btn-simple btn-lg" do %>
+                    <%= image_tag user[:avatar], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+                    <strong><%= user[:name] %></strong>
+                <% end %>
+              <% end %>
+            <% end %>
+    </p>
   <% end %>
 <% end %>
 
@@ -49,3 +55,11 @@
         </div>
     </p>
   <% end %>
+    
+<script>
+  $(document).ready(function(){
+    $('.so_form').on('ajax:beforeSend', function(e, data, status, xhr){
+      $("#so_tab").html("<p><i class='fa fa-circle-o-notch fa-spin fa-2x'></i></p><p>Crunching StackOverflow data! Please be patient!</p>");
+    });
+  });
+</script>
