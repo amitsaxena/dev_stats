@@ -25,12 +25,12 @@
         </div>
     </div>
   <% else %>
-    <p>We didn't find an exact match but you might be looking for someone below! Click to investigate.</p>
+    <p>We didn't find an exact match but you might be looking for someone below!</p>
     <p>
             <% @so_response[:users].each do |user| %>
               <%= form_tag :so_result, :method => :post, :style => "display:inline-block", :class => "so_form", :remote => true do %>
                 <%= hidden_field_tag :so_user_id, user[:user_id] %>
-                <%= button_tag :type => 'submit', :id => "so_submit_button", :class => "btn btn-primary btn-simple btn-lg" do %>
+                <%= button_tag :type => 'submit', :class => "btn btn-primary btn-simple btn-lg" do %>
                     <%= image_tag user[:avatar], :class => "img-rounded", :width => "32", :alt => "avatar" %>
                     <strong><%= user[:name] %></strong>
                 <% end %>

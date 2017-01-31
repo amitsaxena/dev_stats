@@ -37,14 +37,20 @@
             Oops! No relevant Github user found for the data you entered.
         </div>
     </div>
-  <% else %>
-    <p>We didn't find an exact match but you might be looking for someone below!</p>
-    <% @suggestions.each do |user| %>
-      <p><%= image_tag user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
-          <strong><%= user[:login] %></strong>
+<% else %>
+      <p>We didn't find an exact match but you might be looking for someone below!</p>
+      <p>
+     <% @suggestions.each do |user| %>
+            <%= form_tag :github_result, :method => :post, :style => "display:inline-block", :class => "github_form", :remote => true do %>
+              <%= hidden_field_tag :github_username, user[:login] %>
+              <%= button_tag :type => 'submit', :class => "btn btn-primary btn-simple btn-lg" do %>
+                <%= image_tag user[:avatar_url], :class => "img-rounded", :width => "32", :alt => "avatar" %>
+                <strong><%= user[:login] %></strong>
+              <% end %>
+            <% end %>
+          <% end %>
       </p>
     <% end %>
-  <% end %>
 <% end %>
       
 <% if !@error.blank? %>
@@ -62,3 +68,11 @@
         </div>
     </p>
 <% end %>
+    
+<script>
+  $(document).ready(function(){
+    $('.github_form').on('ajax:beforeSend', function(e, data, status, xhr){
+      $("#github_tab").html("<p><i class='fa fa-circle-o-notch fa-spin fa-2x'></i></p><p>Crunching Github data! Please be patient!</p>");
+    });
+  });
+</script>

@@ -35,8 +35,8 @@ class Github
       users = []
       users_email = @client.search_users(email) if !email.blank?
       users_username = @client.search_users(username) if !username.blank?
-      users += users_email[:items][0..4] if !users_email.blank? && !users_email[:items].blank?
-      users += users_username[:items][0..4] if !users_username.blank? && !users_username[:items].blank?
+      users += users_email[:items][0..9] if !users_email.blank? && !users_email[:items].blank?
+      users += users_username[:items][0..9] if !users_username.blank? && !users_username[:items].blank?
       return users.uniq
     rescue
       # Ignore exception - failure of search API should not result in error
