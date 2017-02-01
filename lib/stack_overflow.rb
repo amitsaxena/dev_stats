@@ -45,7 +45,7 @@ class StackOverflow
   def self.user_reach(url)
     doc = Nokogiri::HTML(open(url))
     reach_str = doc.css('.stat').text.squish
-    reach_str.match(/(\S*)\speople reached/i).captures[0] rescue nil
+    reach_str.match(/~(\S*)\speople reached/i).captures[0] rescue nil
   end
   
   def self.user_position(user_id)
