@@ -16,7 +16,7 @@
     <p><span class="label label-primary"><%= @contributions %> open source contributions in the last year</span></p>
   <% end %>
 
-  <% if @fav_languages %>
+  <% if !@fav_languages.blank? %>
     <p>Maximum open source contributions are in <strong><%= @fav_languages[0] %></strong></p>
     <% if !@fav_languages[1..-1].blank? %>
     <p>Has also contributed in <strong><%= @fav_languages[1..-1].to_sentence %></strong></p>

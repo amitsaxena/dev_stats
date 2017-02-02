@@ -50,6 +50,7 @@ class StackOverflow
   
   def self.user_position(user_id)
     position_html = HTTParty.get("http://stackoverflow.com/users/rank?userId=#{user_id}&_=#{DateTime.now.strftime('%Q')}")
+    return nil if position_html.code != 200
     Nokogiri::HTML(position_html.body).text
   end
   
