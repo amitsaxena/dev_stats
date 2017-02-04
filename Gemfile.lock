@@ -57,6 +57,7 @@ GEM
     ffi (1.9.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    honeypot-captcha (0.0.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
@@ -173,6 +174,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  honeypot-captcha
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

@@ -1,6 +1,8 @@
 require 'stack_overflow'
 require 'github'
-class PagesController < ApplicationController  
+class PagesController < ApplicationController
+  
+  prepend_before_filter :protect_from_spam, :only => [:result]
   
   def result
     begin

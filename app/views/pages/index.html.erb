@@ -3,7 +3,7 @@
         <div class="row" id="dev_form">
             <div class="col-md-4 col-md-offset-4">
                 <div class="card card-signup">
-                    <%= form_tag :result, :method => :post, :class => "form", :id => "dev_form", :remote => true do %>
+                    <%= form_tag :result, :method => :post, :class => "form", :id => "dev_form", :honeypot => true, :remote => true do %>
                       <div class="header header-primary text-center">
                           <h4>Investigate a Developer</h4>
                           <div class="social-line">

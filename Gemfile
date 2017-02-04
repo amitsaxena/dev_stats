@@ -57,3 +57,5 @@ gem 'bootstrap-sass'
 gem 'ruby-stackoverflow'
 
 gem "octokit", "~> 4.0"
+
+gem 'honeypot-captcha'
