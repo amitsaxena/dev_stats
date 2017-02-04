@@ -12,8 +12,7 @@ class PagesController < ApplicationController
       end
     rescue Exception => e
       @error = e.message
-      Rails.logger.error(e)
-      Rails.logger.error(e.backtrace.join("\n"))
+      log_error(e)
     end
   end
   
@@ -24,8 +23,7 @@ class PagesController < ApplicationController
       end
     rescue Exception => e
       @error = e.message
-      Rails.logger.error(e)
-      Rails.logger.error(e.backtrace.join("\n"))
+      log_error(e)
     end
   end
   
@@ -57,7 +55,7 @@ class PagesController < ApplicationController
   
   def fetch_github_data
     github = Github.new
-    username = (!params[:github_username].blank? && params[:github_username].strip =~ /^(http|https):\/\/(.)*/i) ? params[:github_username].split("/")[-1] : params[:github_username]
+    username = (!params[:github_username].blank? && params[:github_username].strip =~ /^(http|https):\/\/(.)*/i) ? params[:github_username].strip.split("/")[-1] : params[:github_username]
     @user = github.find_user(username, params[:email])
     if @user.blank?
       @suggestions = github.username_suggestions(username, params[:email])

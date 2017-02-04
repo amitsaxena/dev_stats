@@ -5,4 +5,12 @@ Rails.application.routes.draw do
   post 'github_result', to: 'pages#github_result'
   post 'so_result', to: 'pages#so_result'
   get 'result', to: redirect('/')
+  
+  namespace :api do
+    namespace :v1 do
+      get 'github' => "github#index"
+      get 'stackoverflow' => "stackoverflow#index"
+    end
+  end
+
 end

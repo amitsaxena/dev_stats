@@ -6,7 +6,7 @@ class Github
     @client = Octokit::Client.new(:client_id => ENV["GITHUB_CLIENT_ID"], :client_secret => ENV["GITHUB_CLIENT_SECRET"])
   end
   
-  def find_user(username, email)
+  def find_user(username, email=nil)
     begin
       user = @client.user(username) if !username.blank?
       user = find_user_by_email(email) if user.blank?
